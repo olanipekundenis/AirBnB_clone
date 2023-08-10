@@ -15,9 +15,17 @@ class BaseModel:
 
     def __str__(self):
         """string representation of an instance"""
-        print("[{}] ({}) {}".format(
-            type(self).__name__, self.id, self.__dict__))
+        return "[{}] ({}) {}".format(
+                type(self).__name__, self.id, self.__dict__)
 
     def save(self):
         """update the public instance attribute"""
         self.updated_at = datetime.now()
+
+    def to_dict(self):
+        """Serialize object to JSON"""
+        obj_dict = self.__dict__
+        obj_dict.update({"__class__": type(self).__name__})
+        obj_dict["created_at"] = self.created_at.isoformat()
+        obj_diict["updated_at"] = self.updated_at.isoformat()
+        return obj_dict
