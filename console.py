@@ -2,6 +2,12 @@
 """Console module"""
 import cmd
 from models.base_model import BaseModel
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -9,7 +15,13 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
     classes = {
-            "BaseModel": BaseModel
+            "BaseModel": BaseModel,
+            "Amenity": Amenity,
+            "City": City,
+            "Place": Place,
+            "Review": Review,
+            "State": State,
+            "User": User
             }
 
     # temp test storage
@@ -77,10 +89,11 @@ class HBNBCommand(cmd.Cmd):
             key = "{}.{}".format(cls, line.split()[1])
             if key is None or key not in HBNBCommand.storage.keys():
                 print("** no instance found **")
+                return
         except Exception:
             print("** instance id missing **")
             return
-        return HBNBCommand.storage[key]
+        return HBNBCommand.storage.get(key)
 
 
 if __name__ == "__main__":
