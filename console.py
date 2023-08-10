@@ -69,7 +69,7 @@ class HBNBCommand(cmd.Cmd):
         Prints the string representation
         of an instance based on the class name
 
-        Usage: show <class name> <instance_id>
+        Usage: show <class name> <id>
         """
         cls = HBNBCommand.check_class(line)
         if cls is None:
@@ -84,7 +84,7 @@ class HBNBCommand(cmd.Cmd):
         """
         Deletes an instance based on the class name and id
 
-        Usage: destroy <class_name> <instance_id>
+        Usage: destroy <class name> <id>
         """
         cls = HBNBCommand.check_class(line)
         if cls is None:
@@ -101,14 +101,52 @@ class HBNBCommand(cmd.Cmd):
         Prints all string representation of all instances based
         or not on the class name
 
-        Usage: all [<class_name>]
+        Usage: all [<class name>]
         """
         if line:
             cls = HBNBCommand.check_class(line)
-            objs = {key: str(obj) for key, obj in HBNBCommand.storage.items() if type(obj) is cls}
+            objs = {key: str(obj) for key, obj in HBNBCommand.storage.items()
+                    if type(obj) is cls}
             print(list(objs.values()))
         else:
             print([str(obj) for obj in HBNBCommand.storage.values()])
+
+    def do_update(self, line):
+        """
+        Updates an instance based on the class name and id
+        by adding or updating attribute
+
+        Usage: update <class name> <id> <attribute name> "<attribute value>"
+        """
+        cls = HBNBCommand.check_class(line)
+        if cls is None:
+            return
+
+        obj = HBNBCommand.check_id(line)
+        if cls is None:
+            return
+
+        args = line.split()
+        if len(args) < 3:
+            print("** attribute name missing **")
+            return
+        if len(args) < 4:
+            print("** value missing **")
+            return
+
+        attr_name = args[2]
+        if attr_name in ["id", "created_at", "updated_at"]:
+            return
+        value = args[3].strip("\"")
+        if type(eval(value)) is float:
+            value = float(value)
+        elif type(eval(value)) is int:
+            value = int(value)
+        else:
+            value = str(value)
+
+        setattr(obj, attr_name, value)
+        obj.save()
 
     @staticmethod
     def check_class(line):
