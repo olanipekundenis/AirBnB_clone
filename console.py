@@ -28,22 +28,30 @@ class HBNBCommand(cmd.Cmd):
     storage = {}
 
     def do_EOF(self, line):
-        """Exits the console when CTRL+D is entered"""
+        """
+        Exits the console when CTRL+D is entered
+        """
         print()
         return True
 
     def do_quit(self, line):
-        """Quits the console"""
+        """
+        Quits the console
+        """
         return True
 
     def emptyline(self):
-        """Executes nothing on emptyline + enter"""
+        """
+        Executes nothing on emptyline + enter
+        """
         pass
 
     def do_create(self, line):
-        """Creates a new instance
+        """
+        Creates a new instance
 
-        Usage: create <class name>"""
+        Usage: create <class name>
+        """
         cls = HBNBCommand.check_class(line)
         if cls is None:
             return
@@ -57,10 +65,12 @@ class HBNBCommand(cmd.Cmd):
         print(new_instance.id)
 
     def do_show(self, line):
-        """Prints the string representation"""
-        """of an instance based on the class name
+        """
+        Prints the string representation
+        of an instance based on the class name
 
-        Usage: show <class name> <instance_id>"""
+        Usage: show <class name> <instance_id>
+        """
         cls = HBNBCommand.check_class(line)
         if cls is None:
             return
@@ -69,6 +79,36 @@ class HBNBCommand(cmd.Cmd):
         if obj is None:
             return
         print(obj)
+
+    def do_destroy(self, line):
+        """
+        Deletes an instance based on the class name and id
+
+        Usage: destroy <class_name> <instance_id>
+        """
+        cls = HBNBCommand.check_class(line)
+        if cls is None:
+            return
+
+        obj = HBNBCommand.check_id(line)
+        if obj is None:
+            return
+
+        del HBNBCommand.storage[f"{cls.__name__}.{obj.id}"]
+
+    def do_all(self, line):
+        """
+        Prints all string representation of all instances based
+        or not on the class name
+
+        Usage: all [<class_name>]
+        """
+        if line:
+            cls = HBNBCommand.check_class(line)
+            objs = {key: str(obj) for key, obj in HBNBCommand.storage.items() if type(obj) is cls}
+            print(list(objs.values()))
+        else:
+            print([str(obj) for obj in HBNBCommand.storage.values()])
 
     @staticmethod
     def check_class(line):
