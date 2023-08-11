@@ -61,7 +61,7 @@ class HBNBCommand(cmd.Cmd):
 
         # for testing only
         # HBNBCommand.storage["{}.{}".format(
-            # cls.__name__, new_instance.id)] = new_instance
+        #   cls.__name__, new_instance.id)] = new_instance
 
         print(new_instance.id)
 
