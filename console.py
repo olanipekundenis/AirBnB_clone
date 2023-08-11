@@ -123,7 +123,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         obj = HBNBCommand.check_id(line)
-        if cls is None:
+        if obj is None:
             return
 
         args = line.split()
@@ -137,13 +137,15 @@ class HBNBCommand(cmd.Cmd):
         attr_name = args[2]
         if attr_name in ["id", "created_at", "updated_at"]:
             return
-        value = args[3].strip("\"")
-        if type(eval(value)) is float:
-            value = float(value)
-        elif type(eval(value)) is int:
+        value = line.split('"')[1]
+        value = value.strip("\"").strip(" ")
+        try:
             value = int(value)
-        else:
-            value = str(value)
+        except ValueError:
+            try:
+                value = float(value)
+            except ValueError:
+                value = str(value)
 
         setattr(obj, attr_name, value)
         obj.save()
