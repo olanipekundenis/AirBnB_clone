@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Console module"""
 import cmd
+from models import storage
 from models.base_model import BaseModel
 from models.amenity import Amenity
 from models.city import City
@@ -25,7 +26,7 @@ class HBNBCommand(cmd.Cmd):
             }
 
     # temp test storage
-    storage = {}
+    # storage = {}
 
     def do_EOF(self, line):
         """
@@ -59,8 +60,8 @@ class HBNBCommand(cmd.Cmd):
         new_instance.save()
 
         # for testing only
-        HBNBCommand.storage["{}.{}".format(
-            cls.__name__, new_instance.id)] = new_instance
+        # HBNBCommand.storage["{}.{}".format(
+            # cls.__name__, new_instance.id)] = new_instance
 
         print(new_instance.id)
 
@@ -94,7 +95,9 @@ class HBNBCommand(cmd.Cmd):
         if obj is None:
             return
 
-        del HBNBCommand.storage[f"{cls.__name__}.{obj.id}"]
+        del storage.all()[f"{cls.__name__}.{obj.id}"]
+        storage.save()
+        # del HBNBCommand.storage[f"{cls.__name__}.{obj.id}"]
 
     def do_all(self, line):
         """
@@ -105,11 +108,11 @@ class HBNBCommand(cmd.Cmd):
         """
         if line:
             cls = HBNBCommand.check_class(line)
-            objs = {key: str(obj) for key, obj in HBNBCommand.storage.items()
+            objs = {key: str(obj) for key, obj in storage.all().items()
                     if type(obj) is cls}
             print(list(objs.values()))
         else:
-            print([str(obj) for obj in HBNBCommand.storage.values()])
+            print([str(obj) for obj in storage.all().values()])
 
     def do_update(self, line):
         """
@@ -167,13 +170,13 @@ class HBNBCommand(cmd.Cmd):
         cls = line.split()[0]
         try:
             key = "{}.{}".format(cls, line.split()[1])
-            if key is None or key not in HBNBCommand.storage.keys():
+            if key is None or key not in storage.all().keys():
                 print("** no instance found **")
                 return
         except Exception:
             print("** instance id missing **")
             return
-        return HBNBCommand.storage.get(key)
+        return storage.all()[key]
 
 
 if __name__ == "__main__":
