@@ -70,10 +70,7 @@ class TestUser(TestBaseModel):
         """Test that User has attr email, and it's an empty string"""
         user = User()
         self.assertTrue(hasattr(user, "email"))
-        if models.storage_t == 'db':
-            self.assertEqual(user.email, None)
-        else:
-            self.assertEqual(user.email, "")
+        self.assertEqual(user.email, "")
 
 
 if __name__ == "__main__":
