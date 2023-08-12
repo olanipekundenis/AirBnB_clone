@@ -11,15 +11,17 @@ from models.engine.file_storage import FileStorage
 import os
 from models import storage
 from models.base_model import BaseModel
+from tests.test_models.test_base_model import TestBaseModel
 
 
-class TestAmenity(unittest.TestCase):
+class TestAmenity(TestBaseModel):
 
     """Test Cases for the Amenity class."""
 
     def setUp(self):
         """Sets up test methods."""
-        pass
+        self.name = "Amenity"
+        self.value = Amenity
 
     def tearDown(self):
         """Tears down test methods."""
@@ -40,13 +42,11 @@ class TestAmenity(unittest.TestCase):
         self.assertIsInstance(b, Amenity)
         self.assertTrue(issubclass(type(b), BaseModel))
 
-    # def test_attributes(self):
-        """Tests the attributes of Amenity class."""
-    #    attributes = storage.attributes()["Amenity"]
-    #    o = Amenity()
-    #    for k, v in attributes.items():
-    #        self.assertTrue(hasattr(o, k))
-    #        self.assertEqual(type(getattr(o, k, None)), v)
+    def test_name2(self):
+        """ """
+        new = self.value()
+        self.assertTrue(hasattr(new, "name"))
+        self.assertEqual(new.name, "")
 
 
 if __name__ == "__main__":

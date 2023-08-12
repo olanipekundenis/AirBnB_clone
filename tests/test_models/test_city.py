@@ -48,7 +48,7 @@ class TestCity(TestBaseModel):
         self.assertTrue(hasattr(new, "state_id"))
         self.assertEqual(new.state_id, "")
 
-    def test_name(self):
+    def test_name3(self):
         """ """
         new = self.value()
         self.assertTrue(hasattr(new, "name"))

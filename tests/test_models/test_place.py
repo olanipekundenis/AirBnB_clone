@@ -45,61 +45,53 @@ class TestPlace(TestBaseModel):
     def test_city_id(self):
         """ """
         new = self.value()
-        new.city_id = '1234-abcd-5678-efgh'
-        self.assertEqual(type(new.city_id), str)
+        self.assertTrue(hasattr(new, "city_id"))
+        self.assertEqual(new.city_id, "")
 
     def test_user_id(self):
         """ """
         new = self.value()
-        new.user_id = '1234-abcd-5678-efgh'
-        self.assertEqual(type(new.user_id), str)
+        self.assertTrue(hasattr(new, "user_id"))
+        self.assertEqual(new.user_id, "")
 
-    def test_name(self):
+    def test_name4(self):
         """ """
         new = self.value()
-        new.name = 'name'
-        self.assertEqual(type(new.name), str)
+        self.assertTrue(hasattr(new, "name"))
+        self.assertEqual(new.name, "")
 
     def test_description(self):
         """ """
         new = self.value()
-        new.description = 'description'
-        self.assertEqual(type(new.description), str)
+        self.assertTrue(hasattr(new, "description"))
+        self.assertEqual(new.description, "")
 
     def test_number_rooms(self):
         """ """
         new = self.value()
-        new.number_rooms = 0
-        self.assertEqual(type(new.number_rooms), int)
+        self.assertTrue(hasattr(new, "number_rooms"))
+        self.assertEqual(new.number_rooms, 0)
 
     def test_number_bathrooms(self):
         """ """
         new = self.value()
-        new.number_bathrooms = 0
-        self.assertEqual(type(new.number_bathrooms), int)
+        self.assertTrue(hasattr(new, "number_bathrooms"))
+        self.assertEqual(new.number_bathrooms, 0)
 
     def test_max_guest(self):
         """ """
         new = self.value()
-        new.max_guest = 0
-        self.assertEqual(type(new.max_guest), int)
+        self.assertTrue(hasattr(new, "max_guest"))
+        self.assertEqual(new.max_guest, 0)
 
     def test_price_by_night(self):
         """ """
         new = self.value()
-        new.price_by_night = 0
-        self.assertEqual(type(new.price_by_night), int)
+        self.assertTrue(hasattr(new, "price_by_night"))
+        self.assertEqual(new.price_by_night, 0)
 
     def test_latitude(self):
         """ """
         new = self.value()
-        new.longitude = 4.2
-        self.assertEqual(type(new.longitude), float)
-
-    # def test_attributes(self):
-        """Tests the attributes of Place class."""
-    #    attributes = storage.attributes()["Place"]
-    #    o = Place()
-    #    for k, v in attributes.items():
-    #        self.assertTrue(hasattr(o, k))
-    #        self.assertEqual(type(getattr(o, k, None)), v)
+        self.assertTrue(hasattr(new, "latitude"))
+        self.assertEqual(new.latitude, 0.0)
