@@ -45,32 +45,26 @@ class TestUser(TestBaseModel):
     def test_first_name(self):
         """ """
         user = self.value()
-        user.first_name = 'firstname'
-        self.assertEqual(type(user.first_name), str)
+        self.assertTrue(hasattr(user, "first_name"))
+        self.assertEqual(user.first_name, "")
 
     def test_last_name(self):
         """ """
         user = self.value()
-        user.last_name = 'lastname'
-        self.assertEqual(type(user.last_name), str)
+        self.assertTrue(hasattr(user, "last_name"))
+        self.assertEqual(user.last_name, "")
 
     def test_email(self):
         """ """
         user = self.value()
-        user.email = 'name@email.com'
-        self.assertEqual(type(user.email), str)
+        self.assertTrue(hasattr(user, "email"))
+        self.assertEqual(user.email, "")
 
     def test_password(self):
         """ """
         user = self.value()
-        user.password = 'password'
-        self.assertEqual(type(user.password), str)
-
-    def test_email_attr(self):
-        """Test that User has attr email, and it's an empty string"""
-        user = User()
-        self.assertTrue(hasattr(user, "email"))
-        self.assertEqual(user.email, "")
+        self.assertTrue(hasattr(user, "password"))
+        self.assertEqual(user.password, "")
 
 
 if __name__ == "__main__":
