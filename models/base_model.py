@@ -11,7 +11,10 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """Initialization of model"""
         if kwargs is not None and kwargs != {}:
-            del kwargs["__class__"]
+            try:
+                del kwargs["__class__"]
+            except KeyError:
+                pass
             for key in kwargs.keys():
                 if key == "created_at":
                     self.__dict__["created_at"] = datetime.strptime(
