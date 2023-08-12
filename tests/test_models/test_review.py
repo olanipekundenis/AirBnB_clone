@@ -11,15 +11,17 @@ from models.engine.file_storage import FileStorage
 import os
 from models import storage
 from models.base_model import BaseModel
+from tests.test_models.test_base_model import TestBaseModel
 
 
-class TestReview(unittest.TestCase):
+class TestReview(TestBaseModel):
 
     """Test Cases for the Review class."""
 
     def setUp(self):
         """Sets up test methods."""
-        pass
+        self.name = "Review"
+        self.value = Review
 
     def tearDown(self):
         """Tears down test methods."""
@@ -40,13 +42,25 @@ class TestReview(unittest.TestCase):
         self.assertIsInstance(b, Review)
         self.assertTrue(issubclass(type(b), BaseModel))
 
-    # def test_attributes(self):
-        """Tests the attributes of Review class."""
-    #    attributes = storage.attributes()["Review"]
-    #    o = Review()
-    #    for k, v in attributes.items():
-    #        self.assertTrue(hasattr(o, k))
-    #        self.assertEqual(type(getattr(o, k, None)), v)
+    def test_place_id(self):
+        """ """
+        new = self.value()
+        self.assertTrue(hasattr(new, "place_id"))
+        self.assertEqual(new.place_id, "")
+
+    def test_user_id(self):
+        """ """
+        new = self.value()
+        self.assertTrue(hasattr(new, "user_id"))
+        self.assertEqual(new.user_id, "")
+       
+
+    def test_text(self):
+        """ """
+        new = self.value()
+        self.assertTrue(hasattr(new, "text"))
+        self.assertEqual(new.text, "")
+
 
 
 if __name__ == "__main__":
