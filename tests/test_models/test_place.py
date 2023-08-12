@@ -91,6 +91,9 @@ class TestPlace(unittest.TestCase):
 
     def test_latitude(self):
         """ """
+        new = self.value()
+        new.longitude = 4.2
+        self.assertEqual(type(new.longitude), float)
 
     # def test_attributes(self):
         """Tests the attributes of Place class."""
