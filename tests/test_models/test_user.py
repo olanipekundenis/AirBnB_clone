@@ -44,27 +44,27 @@ class TestUser(TestBaseModel):
 
     def test_first_name(self):
         """ """
-        new = self.value()
-        new.first_name = 'firstname'
-        self.assertEqual(type(new.first_name), str)
+        user = self.value()
+        user.first_name = 'firstname'
+        self.assertEqual(type(user.first_name), str)
 
     def test_last_name(self):
         """ """
-        new = self.value()
-        new.last_name = 'lastname'
-        self.assertEqual(type(new.last_name), str)
+        user = self.value()
+        user.last_name = 'lastname'
+        self.assertEqual(type(user.last_name), str)
 
     def test_email(self):
         """ """
-        new = self.value()
-        new.email = 'name@email.com'
-        self.assertEqual(type(new.email), str)
+        user = self.value()
+        user.email = 'name@email.com'
+        self.assertEqual(type(user.email), str)
 
     def test_password(self):
         """ """
-        new = self.value()
-        new.password = 'password'
-        self.assertEqual(type(new.password), str)
+        user = self.value()
+        user.password = 'password'
+        self.assertEqual(type(user.password), str)
 
 
 if __name__ == "__main__":
