@@ -66,6 +66,15 @@ class TestUser(TestBaseModel):
         user.password = 'password'
         self.assertEqual(type(user.password), str)
 
+    def test_email_attr(self):
+        """Test that User has attr email, and it's an empty string"""
+        user = User()
+        self.assertTrue(hasattr(user, "email"))
+        if models.storage_t == 'db':
+            self.assertEqual(user.email, None)
+        else:
+            self.assertEqual(user.email, "")
+
 
 if __name__ == "__main__":
     unittest.main()
