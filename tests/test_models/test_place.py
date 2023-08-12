@@ -11,9 +11,10 @@ from models.engine.file_storage import FileStorage
 import os
 from models import storage
 from models.base_model import BaseModel
+from tests.test_models.test_base_model import TestBaseModel
 
 
-class TestPlace(unittest.TestCase):
+class TestPlace(TestBaseModel):
 
     """Test Cases for the Place class."""
 
@@ -102,7 +103,3 @@ class TestPlace(unittest.TestCase):
     #    for k, v in attributes.items():
     #        self.assertTrue(hasattr(o, k))
     #        self.assertEqual(type(getattr(o, k, None)), v)
-
-
-if __name__ == "__main__":
-    unittest.main()

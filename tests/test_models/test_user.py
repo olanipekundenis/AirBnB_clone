@@ -19,7 +19,8 @@ class TestUser(unittest.TestCase):
 
     def setUp(self):
         """Sets up test methods."""
-        pass
+        self.name = "User"
+        self.value = User
 
     def tearDown(self):
         """Tears down test methods."""
@@ -40,13 +41,29 @@ class TestUser(unittest.TestCase):
         self.assertIsInstance(b, User)
         self.assertTrue(issubclass(type(b), BaseModel))
 
-    # def test_attributes(self):
-        """Tests the attributes of User class."""
-    #    attributes = storage.attributes()["User"]
-    #    o = User()
-    #    for k, v in attributes.items():
-    #        self.assertTrue(hasattr(o, k))
-    #        self.assertEqual(type(getattr(o, k, None)), v)
+    def test_first_name(self):
+        """ """
+        new = self.value()
+        new.first_name = 'firstname'
+        self.assertEqual(type(new.first_name), str)
+
+    def test_last_name(self):
+        """ """
+        new = self.value()
+        new.last_name = 'lastname'
+        self.assertEqual(type(new.last_name), str)
+
+    def test_email(self):
+        """ """
+        new = self.value()
+        new.email = 'name@email.com'
+        self.assertEqual(type(new.email), str)
+
+    def test_password(self):
+        """ """
+        new = self.value()
+        new.password = 'password'
+        self.assertEqual(type(new.password), str)
 
 
 if __name__ == "__main__":
