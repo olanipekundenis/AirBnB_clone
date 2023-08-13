@@ -108,6 +108,8 @@ class HBNBCommand(cmd.Cmd):
         """
         if line:
             cls = HBNBCommand.check_class(line)
+            if cls is None:
+                return
             objs = {key: str(obj) for key, obj in storage.all().items()
                     if type(obj) is cls}
             print(list(objs.values()))
